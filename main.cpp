@@ -4,13 +4,13 @@ using namespace std;
 #include "Point3D.h"
 
 
-void CallKernel(Point3D* h_points, const int count);
+void CallKernel(Point3D<float>* h_points, const int count);
 
-void PrintPoints(Point3D* points, const int count)
+void PrintPoints(Point3D<float>* points, const int count)
 {
     for (int i = 0; i < count; i++)
     {
-        Point3D& p = points[i];
+        Point3D<float>& p = points[i];
         cout << "i " << i
              << ": " << p._x
              << " " << p._y
@@ -24,11 +24,11 @@ int main(int argc, char* argv[])
     cout << "starting" << endl;
     int count = 100;
 
-    Point3D* points = new Point3D[count];
+    Point3D<float>* points = new Point3D<float>[count];
 
     for (int i = 0; i < count; i++)
     {
-        Point3D& p = points[i];
+        Point3D<float>& p = points[i];
         p._x = i;
         p._y = 10;
         p._z = count - i;

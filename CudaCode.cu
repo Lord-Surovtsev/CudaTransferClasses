@@ -37,7 +37,7 @@ int CudaCheckLastError()
 
 
 __global__
-void operationKernel(Point3D* d_points, const int count)
+void operationKernel(Point3D<float>* d_points, const int count)
 {
     int myId = threadIdx.x + blockDim.x * blockIdx.x;
     if (count <= myId)
@@ -48,14 +48,14 @@ void operationKernel(Point3D* d_points, const int count)
 }
 
 
-void CallKernel(Point3D* h_points, const int count)
+void CallKernel(Point3D<float>* h_points, const int count)
 {
     const int threads = 16;
     const dim3 gridSize((count + threads - 1) / threads);
     const dim3 blockSize(threads);
 
-    const size_t memLen = sizeof(Point3D) * count;
-    Point3D* d_points;
+    const size_t memLen = sizeof(Point3D<float>) * count;
+    Point3D<float>* d_points;
     cudaMalloc((void**)&d_points, memLen );
     cudaMemcpy(d_points, h_points, memLen, cudaMemcpyHostToDevice);
     CudaCheckLastError();
